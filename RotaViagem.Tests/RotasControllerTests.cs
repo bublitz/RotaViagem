@@ -30,21 +30,17 @@ namespace RotaViagemAPI.Tests
         [Fact]
         public async Task GetRotas_ReturnsOkResult_WithListOfRotas()
         {
-            // Arrange
             var rotas = new List<Rota>
             {
                 new Rota { Id = 1, Origem = "A", Destino = "B", Valor = 100 },
                 new Rota { Id = 2, Origem = "B", Destino = "C", Valor = 150 }
             };
 
-            // Adicionando as rotas ao banco em memória
             _context.Rotas.AddRange(rotas);
             await _context.SaveChangesAsync();
 
-            // Act
             var result = await _controller.GetRotas();
 
-            // Assert
             var okResult = Assert.IsType<OkObjectResult>(result.Result);
             var resultRotas = Assert.IsType<List<Rota>>(okResult.Value);
             Assert.Equal(2, resultRotas.Count);
@@ -53,13 +49,10 @@ namespace RotaViagemAPI.Tests
         [Fact]
         public async Task PostRota_ReturnsCreatedAtAction_WithRota()
         {
-            // Arrange
             var newRota = new Rota { Origem = "A", Destino = "C", Valor = 200 };
 
-            // Act
             var result = await _controller.PostRota(newRota);
 
-            // Assert
             var createdAtActionResult = Assert.IsType<CreatedAtActionResult>(result.Result);
             var rota = Assert.IsType<Rota>(createdAtActionResult.Value);
             Assert.Equal("A", rota.Origem);
@@ -67,7 +60,6 @@ namespace RotaViagemAPI.Tests
             Assert.Equal(200, rota.Valor);
         }
 
-        // Outros testes seguem o mesmo padrão...
     }
 }
 

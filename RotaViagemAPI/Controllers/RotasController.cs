@@ -17,8 +17,11 @@ namespace RotaViagemAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Rota>>> GetRotas() =>
-            await _context.Rotas.ToListAsync();
+        public async Task<ActionResult<IEnumerable<Rota>>> GetRotas()
+        {
+            var rotas = await _context.Rotas.ToListAsync();
+            return Ok(rotas);
+        }
 
         [HttpPost]
         public async Task<ActionResult<Rota>> PostRota(Rota rota)

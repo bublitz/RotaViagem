@@ -1,10 +1,13 @@
-﻿namespace RotaViagemAPI.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace RotaViagemAPI.Models
 {
     public class Rota
     {
-        public required int Id { get; set; }
-        public required string Origem { get; set; }
-        public required string Destino { get; set; }
-        public int Valor { get; set; }
+        [Key]
+        public int Id { get; set; }
+        public string Origem { get; set; }
+        public string Destino { get; set; }
+        public decimal Valor { get; set; }
     }
 }

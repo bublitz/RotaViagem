@@ -25,13 +25,13 @@ namespace RotaViagemAPI.Controllers
         {
             _context.Rotas.Add(rota);
             await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetRotas), new { origem = rota.Origem, destino = rota.Destino }, rota);
+            return CreatedAtAction(nameof(GetRotas), new { id = rota.Id }, rota);
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> DeleteRota(string origem, string destino)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteRota(int id)
         {
-            var rota = await _context.Rotas.FirstOrDefaultAsync(r => r.Origem == origem && r.Destino == destino);
+            var rota = await _context.Rotas.FindAsync(id);
             if (rota == null) return NotFound();
 
             _context.Rotas.Remove(rota);
